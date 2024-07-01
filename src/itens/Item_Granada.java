@@ -2,7 +2,7 @@ package itens;
 
 import excecoes.ItemErradoException;
 import personagem.PersonagemPadrao;
-import combate.EsquemaCombate;
+//import combate.EsquemaCombate;
 
 public class Item_Granada extends ItemPadrao{
     private int quantidadeGranadas;
@@ -16,7 +16,7 @@ public class Item_Granada extends ItemPadrao{
     @Override
    public void usarItem(ItemPadrao item) throws ItemErradoException{
       if (item instanceof Item_Granada) {
-          ataqueEspecial(this.quantidadeGranadas);
+          //ataqueEspecial(this.quantidadeGranadas);
           
       }
       else{
