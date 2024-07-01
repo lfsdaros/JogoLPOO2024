@@ -1,10 +1,14 @@
-package personagem;
+package entidades.personagem;
 
 public class Artilharia extends PersonagemPadrao {
     private int danoSniper = 50;
 
-    public Artilharia(int nivelAtual){
-        super(nivelAtual);
+    // public Artilharia(int nivelAtual){
+    //     super(nivelAtual);
+    // }
+
+    public Artilharia(int x, int y, int velocidade, int saudeAtual, int protecaoAtual, int nivelAtual){
+        super(x, y, velocidade, saudeAtual, protecaoAtual, nivelAtual);
     }
 
     public int getDanoSniper(){

@@ -1,7 +1,7 @@
 package itens;
 
+import entidades.personagem.PersonagemPadrao;
 import excecoes.ItemErradoException;
-import personagem.PersonagemPadrao;
 
 public abstract class ItemPadrao {
     
@@ -18,22 +18,22 @@ public abstract class ItemPadrao {
     }
 
     public boolean  achouItem(int x_item, int y_item){
-        boolean retorno = (x_item == this.player.getX_personagem() && y_item == this.player.getY_personagem());
+        boolean retorno = (x_item == this.player.getX() && y_item == this.player.getY());
         System.out.println("Parabens! voce achou um(a) ");
         return retorno;
     }
     
-    public void pegarItem(int x_item, int y_item, ItemPadrao item){
-       if(achouItem(x_item, y_item) == true){
-            if (){  //tecla a definir
-                this.inventario.adicionarItem(item);   
-            }
-            else if () { // tecla a definir
-                usarItem(item);
-            }
-       }
+    // public void pegarItem(int x_item, int y_item, ItemPadrao item){
+    //    if(achouItem(x_item, y_item) == true){
+    //         if (){  //tecla a definir
+    //             this.inventario.adicionarItem(item);   
+    //         }
+    //         else if () { // tecla a definir
+    //             usarItem(item);
+    //         }
+    //    }
             
-    }
+    // }
                 
     public abstract void usarItem(ItemPadrao item) throws ItemErradoException;
    

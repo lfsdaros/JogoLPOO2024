@@ -1,7 +1,7 @@
 package itens;
 
+import entidades.personagem.PersonagemPadrao;
 import excecoes.ItemErradoException;
-import personagem.PersonagemPadrao;
 
 public class Item_Energetico extends ItemPadrao {
 
@@ -14,8 +14,8 @@ public class Item_Energetico extends ItemPadrao {
     @Override
     public void usarItem(ItemPadrao item) throws ItemErradoException{
         if(item instanceof Item_Energetico){
-          int novaVelocidade = super.player.getVelocidadePersonagem() + this.boostEnergetico;
-          super.player.setVelocidadePersonagem(novaVelocidade);
+          int novaVelocidade = super.player.getVelocidade() + this.boostEnergetico;
+          super.player.setVelocidade(novaVelocidade);
         } else{
             throw new ItemErradoException("Item errado");
         }

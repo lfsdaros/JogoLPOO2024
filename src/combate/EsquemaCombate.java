@@ -1,7 +1,7 @@
 package combate;
 
-import npcs.Inimigos;
-import personagem.PersonagemPadrao;
+import entidades.npcs.Inimigos;
+import entidades.personagem.PersonagemPadrao;
 
 public class EsquemaCombate {
     PersonagemPadrao personagem;
@@ -14,10 +14,10 @@ public class EsquemaCombate {
 
     public void entrarNoCombate(){
 
-        int x_personagem = personagem.getX_personagem();
-        int y_personagem = personagem.getY_personagem();
-        int x_inimigo = inimigo.getX_inimigo();
-        int y_inimigo = inimigo.getY_inimigo();
+        int x_personagem = personagem.getX();
+        int y_personagem = personagem.getY();
+        int x_inimigo = inimigo.getX();
+        int y_inimigo = inimigo.getY();
 
         if(x_personagem == x_inimigo && y_personagem == y_inimigo){
             startCombate();

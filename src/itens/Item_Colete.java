@@ -1,8 +1,8 @@
 package itens;
 
 
+import entidades.personagem.PersonagemPadrao;
 import excecoes.ItemErradoException;
-import personagem.PersonagemPadrao;
 
 public class Item_Colete extends ItemPadrao {
     private final int protecaoColete = 10 ;

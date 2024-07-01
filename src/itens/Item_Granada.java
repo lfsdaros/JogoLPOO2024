@@ -1,8 +1,7 @@
 package itens;
 
+import entidades.personagem.PersonagemPadrao;
 import excecoes.ItemErradoException;
-import personagem.PersonagemPadrao;
-//import combate.EsquemaCombate;
 
 public class Item_Granada extends ItemPadrao{
     private int quantidadeGranadas;

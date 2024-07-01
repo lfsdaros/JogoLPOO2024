@@ -1,11 +1,15 @@
-package personagem;
+package entidades.personagem;
 
 public class Cavalaria extends PersonagemPadrao {
     private int danoRevolver;  //padrao = ?
    
-    public Cavalaria(int nivelAtual){
-        super(nivelAtual);
-    }
+    // public Cavalaria(int nivelAtual){
+    //     super(nivelAtual);
+    // }
+
+    public Cavalaria(int x, int y, int velocidade, int saudeAtual, int protecaoAtual, int nivelAtual){
+        super(x, y, velocidade, saudeAtual, protecaoAtual, nivelAtual);
+      }
 
     public int getDanoRevolver(){
         return this.danoRevolver;

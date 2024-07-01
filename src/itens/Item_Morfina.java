@@ -1,7 +1,7 @@
 package itens;
 
+import entidades.personagem.PersonagemPadrao;
 import excecoes.ItemErradoException;
-import personagem.PersonagemPadrao;
 
 public class Item_Morfina extends ItemPadrao {
 
@@ -15,7 +15,7 @@ public class Item_Morfina extends ItemPadrao {
     public void usarItem(ItemPadrao item) throws ItemErradoException{
         if(item instanceof Item_Morfina){
           int novaSaude = super.player.getSaudeAtual() + this.saudeMorfina;
-          super.player.setVelocidadePersonagem(novaSaude);
+          super.player.setSaudeAtual(novaSaude);
         } else{
             throw new ItemErradoException("Item errado");
         }
