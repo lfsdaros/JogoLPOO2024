@@ -1,32 +1,25 @@
 package itens;
 
+
+import excecoes.ItemErradoException;
+import personagem.PersonagemPadrao;
+
 public class Item_Colete extends ItemPadrao {
     private final int protecaoColete = 10 ;
 
-    
-
-
-    public Item_Colete(int x_item, int y_item) {
-        super(x_item, y_item);
+    public Item_Colete(int x_item, int y_item, PersonagemPadrao player, Inventario inventario) {
+        super(x_item, y_item, player, inventario);
     }
 
-    
     @Override
-    public void usarItem(){
-      if(super.pegarItem(super.getX_item(), super.getY_item()) == 1)
-      {
-        System.out.println("VOCE ACHOU UM COLETE!");
-        //usar item ou guardar no inventario
-        System.out.println("VOCÊ QUER USAR(e) ou GUARDAR(i) NO INVENTÁRIO? ");
-        //if (e apertado) -> super.player.setProtecao(super.player.getProtecao() + 10) 
-        //else if (i apertado) -> guardar no inventario e this.quantidadeGranadas += 1
-            //if this.quantidadeGranadas >= 10 --> ESPECIAL
+    public void usarItem(ItemPadrao item) throws ItemErradoException{
+        if(item instanceof Item_Colete){
+            int novaProtecao = super.player.getProtecaoAtual() + this.protecaoColete;
+            super.player.setProtecaoAtual(novaProtecao);
+        } else{
+            throw new ItemErradoException("Item errado");
         }
     }
 
-
-    public int getProtecaoColete() {
-        return protecaoColete;
-    }
 
 }

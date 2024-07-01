@@ -27,7 +27,7 @@ public class PersonagemPadrao {
     this.velocidadePersonagem = 5;
 
     //this.saudeAtual = saudeAtual;
-    setPatenteAtual(nivelAtual);
+    //setPatenteAtual(nivelAtual);
     
    }
 
@@ -80,26 +80,26 @@ public class PersonagemPadrao {
 
     public void setPatenteAtual(int nivelAtual){    
         switch(nivelAtual){
-          case 2:
-            this.patenteAtual = "Cabo";
-            this.danoPatente = 10;
-            break;
-          case 3:
-            this.patenteAtual = "Tenente";
-            this.danoPatente = 25;
-            break;
-          case 4:
-            this.patenteAtual = "Capitão";
-            this.danoPatente = 50;
-            break;
-          case 5: 
-            this.patenteAtual = "General";
-            this.danoPatente = danoBacamarte;
-            break;
-          default:
-            this.patenteAtual = "Recruta";  //nivel basico 
-            this.danoPatente = 5;
-            break;    
+          case 2 -> {
+              this.patenteAtual = "Cabo";
+              this.danoPatente = 10;
+            }
+          case 3 -> {
+              this.patenteAtual = "Tenente";
+              this.danoPatente = 25;
+            }
+          case 4 -> {
+              this.patenteAtual = "Capitão";
+              this.danoPatente = 50;
+            }
+          case 5 -> {
+              this.patenteAtual = "General";
+              this.danoPatente = danoBacamarte;
+            }
+          default -> {
+              this.patenteAtual = "Recruta";  //nivel basico
+              this.danoPatente = 5;
+            }    
         }   
     }
 

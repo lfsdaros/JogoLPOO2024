@@ -1,34 +1,24 @@
 package itens;
 
+import excecoes.ItemErradoException;
+import personagem.PersonagemPadrao;
+
 public class Item_Energetico extends ItemPadrao {
-    public int boostEnergetico;
+
+    public final int boostEnergetico = 2;
     
-    public Item_Energetico(int x_item, int y_item) {
-        super(x_item, y_item);
-        this.boostEnergetico = 2;
+    public Item_Energetico(int x_item, int y_item, PersonagemPadrao player, Inventario inventario ) {
+        super(x_item, y_item, player, inventario);
     }
 
-    
     @Override
-    public void usarItem(){
-      if(super.pegarItem(super.getX_item(), super.getY_item()) == 1)
-      {
-        System.out.println("VOCE ACHOU UM ENERGÉTICO!");
-        //usar item ou guardar no inventario
-        System.out.println("VOCÊ QUER USAR(e) ou GUARDAR(i) NO INVENTÁRIO? ");
-        //if (e apertado) -> aumentar velocidade em 2  e boost ++ 
-        //else if (i apertado) -> guardar no inventario
-      }
+    public void usarItem(ItemPadrao item) throws ItemErradoException{
+        if(item instanceof Item_Energetico){
+          int novaVelocidade = super.player.getVelocidadePersonagem() + this.boostEnergetico;
+          super.player.setVelocidadePersonagem(novaVelocidade);
+        } else{
+            throw new ItemErradoException("Item errado");
+        }
     }
-
-    public int getBoostEnergetico() {
-      return boostEnergetico;
-    }
-
-
-    public void setBoostEnergetico(int boostEnergetico) {
-      this.boostEnergetico = boostEnergetico;
-    }
-
     
 }

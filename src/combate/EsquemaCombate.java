@@ -13,6 +13,7 @@ public class EsquemaCombate {
     }
 
     public void entrarNoCombate(){
+
         int x_personagem = personagem.getX_personagem();
         int y_personagem = personagem.getY_personagem();
         int x_inimigo = inimigo.getX_inimigo();
@@ -47,7 +48,13 @@ public class EsquemaCombate {
         }
     }
 
-
+    public void ataqueEspecial(int quantidadeGranadas){
+        if(quantidadeGranadas >= 10){
+            int danoGranada = 70;
+            int saudeInimigo = this.inimigo.getSaudeAtual();
+            this.inimigo.setSaudeAtual(saudeInimigo - danoGranada); 
+        }
+    }
 
     public int defender(){
         return 10;
