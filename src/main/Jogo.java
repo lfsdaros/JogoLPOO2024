@@ -1,25 +1,29 @@
-package main;
+// package main;
 
-import javax.swing.JFrame;
+// import javax.swing.JFrame;
+
+// //import Personagem.PersonagemPadrao;
+// //import Personagem.Artilharia;
+// //import Personagem.Cavalaria;
+// //import Personagem.Infantaria;
 
 
-public class Jogo {
-    public static void main(String[] args) {
+
+// public class Jogo {
+//     public static void main(String[] args) {
         
-        JFrame window = new JFrame();
-        TelaJogo telaJogo = new TelaJogo();
+//         JFrame window = new JFrame();
+//         TelaJogo telaJogo = new TelaJogo();
         
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //fechar window qd cliar o botao (X)
-        window.setResizable(false);
-        window.setTitle("JOGO LPOO 2024 - GUERRA");
-        window.add(telaJogo);
-        window.pack();
-        window.setLocationRelativeTo(null);
-        window.setVisible(true); 
+//         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //fechar window qd cliar o botao (X)
+//         window.setResizable(false);
+//         window.setTitle("JOGO LPOO 2024 - GUERRA");
+//         window.add(telaJogo);
+//         window.pack();
+//         window.setLocationRelativeTo(null);
+//         window.setVisible(true); 
 
-        telaJogo.startGameThread();   //faz a tela aparecer 
-    }
-}
+//         // telaJogo.startGameThread();   //faz a tela aparecer 
 
 //         // Cavalaria p3 = new Cavalaria(5, 100);
 
