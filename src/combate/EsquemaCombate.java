@@ -4,6 +4,7 @@ import entidades.npcs.Inimigos;
 import entidades.personagem.PersonagemPadrao;
 
 public class EsquemaCombate {
+
     PersonagemPadrao personagem;
     Inimigos inimigo;
 
@@ -27,24 +28,30 @@ public class EsquemaCombate {
 
 
     public void startCombate(){
-        //personagem.
+        //Tela nova na Interface Gráfica
 
     }
 
     public void atacar(PersonagemPadrao player, Inimigos inimigo){
+
         player.setPatenteAtual(player.getNivelAtual());    //definindo o dano que P dará a partir da sua patente
         
         int saudeInimigo = inimigo.getSaudeAtual();
         int defesaInimigo = inimigo.getProtecaoAtual();
 
-        if(defender() == 0){
-            inimigo.setSaudeAtual(saudeInimigo - (player.getDanoPatente()));
-        } else if (defender() == 1){
+        int danoPlayer = player.getDanoPatente();
+
+        if(defender() == false){
+
+            inimigo.setSaudeAtual(saudeInimigo - (danoPlayer));
+
+        } else if (defender() == true){
+
             System.out.println("O inimigo conseguiu defender ");
 
-            inimigo.setSaudeAtual(saudeInimigo - (player.getDanoPatente() - inimigo.getProtecaoAtual()));
+            inimigo.setSaudeAtual(saudeInimigo - (danoPlayer - defesaInimigo));
             
-            inimigo.setProtecaoAtual(defesaInimigo - player.getDanoPatente());
+            inimigo.setProtecaoAtual(defesaInimigo - danoPlayer);
         }
     }
 
@@ -56,8 +63,8 @@ public class EsquemaCombate {
         }
     }
 
-    public int defender(){
-        return 10;
+    public boolean defender(){
+        return true; //integrar com KeyHandler depois
     }
 
 }
