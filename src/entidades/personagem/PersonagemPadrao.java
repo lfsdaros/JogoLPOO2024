@@ -8,6 +8,11 @@ public class PersonagemPadrao extends Entidade{
   private final int danoBacamarte = 100;  //arma p todos
   private final int saudeMaxima = 100;
 
+  private boolean movingUp = false;
+  private boolean movingLeft = false;
+  private boolean movingDown = false;
+  private boolean movingRight = false;
+
 
   public PersonagemPadrao(int x, int y, int velocidade, int saudeAtual, int protecaoAtual, int nivelAtual){
     super(x, y, velocidade, saudeAtual, protecaoAtual, nivelAtual);
@@ -15,27 +20,27 @@ public class PersonagemPadrao extends Entidade{
  
 
   public void setPatenteAtual(int nivelAtual){    
-      switch(nivelAtual){
-        case 2 -> {
-            this.patenteAtual = "Cabo";
-            this.danoPatente = 10;
-          }
-        case 3 -> {
-            this.patenteAtual = "Tenente";
-            this.danoPatente = 25;
-          }
-        case 4 -> {
-            this.patenteAtual = "Capitão";
-            this.danoPatente = 50;
-          }
-        case 5 -> {
-            this.patenteAtual = "General";
-            this.danoPatente = danoBacamarte;
-          }
-        default -> {
-            this.patenteAtual = "Recruta";  //nivel basico
-            this.danoPatente = 5;
-          }    
+    switch(nivelAtual){
+      case 2 -> {
+          this.patenteAtual = "Cabo";
+          this.danoPatente = 10;
+        }
+      case 3 -> {
+          this.patenteAtual = "Tenente";
+          this.danoPatente = 25;
+        }
+      case 4 -> {
+          this.patenteAtual = "Capitão";
+          this.danoPatente = 50;
+        }
+      case 5 -> {
+          this.patenteAtual = "General";
+          this.danoPatente = danoBacamarte;
+        }
+      default -> {
+          this.patenteAtual = "Recruta";  //nivel basico
+          this.danoPatente = 5;
+        }    
       }   
   }
 
@@ -56,6 +61,56 @@ public class PersonagemPadrao extends Entidade{
     }
   }
 
+
+  public void moveUp() {
+    super.setY(super.getY() - super.getVelocidade());
+  }
+
+  public void moveLeft() {
+      super.setX(super.getX() - super.getVelocidade());
+  }
+
+  public void moveDown() {
+      super.setY(super.getY() + super.getVelocidade());
+  }
+
+  public void moveRight() {
+      super.setX(super.getX() + super.getVelocidade());
+  }
+
+  public boolean isMovingUp() {
+      return movingUp;
+  }
+
+  public void setMovingUp(boolean movingUp) {
+      this.movingUp = movingUp;
+  }
+
+  public boolean isMovingLeft() {
+      return movingLeft;
+  }
+
+  public void setMovingLeft(boolean movingLeft) {
+      this.movingLeft = movingLeft;
+  }
+
+  public boolean isMovingDown() {
+      return movingDown;
+  }
+
+  public void setMovingDown(boolean movingDown) {
+      this.movingDown = movingDown;
+  }
+
+  public boolean isMovingRight() {
+      return movingRight;
+  }
+
+  public void setMovingRight(boolean movingRight) {
+      this.movingRight = movingRight;
+  }
+
+}
 
 
 
@@ -193,4 +248,4 @@ public class PersonagemPadrao extends Entidade{
     
 
 
-}
+
