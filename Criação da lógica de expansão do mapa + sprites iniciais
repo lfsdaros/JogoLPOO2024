@@ -1,0 +1,188 @@
+package main;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import javax.swing.JPanel;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.ImageIcon;
+
+public class Tela extends JPanel implements Runnable{
+
+    final int originalTileSize = 16;
+    final int scale = 3;
+    final int tileSize = originalTileSize * scale;
+    final int maxScreenCol = 16;
+    final int maxScreenRow = 12;
+    final int screenWidth;
+    final int screenHeight;
+    private double intervalo;
+    private double delta;
+    private long ultimaAtualizacao;
+    private long tempoReal;
+    private Image playerSprite;
+    private Image object1Sprite;
+    private Image object2Sprite;
+    private Image background;
+    private int object1X;
+    private int object1Y;
+    private int object2X;
+    private int object2Y;
+    private int objectWidth;
+    private int objectHeight;
+    private int largura_mapa;
+    private int altura_mapa;
+    private int[][] mapa_expansao;
+    private int playerX = 700;
+    private int playerY = 400;
+    private int playerSpeed = 4;
+    private int fps = 60;
+
+    Movimento m1 = new Movimento(getAutoscrolls(), getAutoscrolls(), getAutoscrolls(), getAutoscrolls());
+    Thread gameThread;
+
+    public Tela(){
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        screenWidth = screenSize.width;
+        screenHeight = screenSize.height;
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setBackground(new Color(46, 11, 0));
+        this.setDoubleBuffered(true);
+        this.addKeyListener(m1);
+        this.setFocusable(true);
+        
+        playerSprite = new ImageIcon("C:\\Users\\Saúde\\OneDrive\\Área de Trabalho\\FrontEnd Hospitais\\png-clipart-pixel-art-drawing-art-game-character-animation-animation-game-cartoon.png").getImage();   
+        background = new ImageIcon("C:\\Users\\Saúde\\Downloads\\New Piskel-1.png.png").getImage();
+        object1Sprite = new ImageIcon("C:\\Users\\Saúde\\Downloads\\New Piskel-2.png.png").getImage();
+        object2Sprite = new ImageIcon("C:\\Users\\Saúde\\Downloads\\New Piskel-1.png (2).png").getImage();
+
+        object1X = 200;
+        object1Y = 300;
+        object2X = 800;
+        object2Y = 600;
+        objectWidth = 32;
+        objectHeight = 32;
+        
+        largura_mapa = screenWidth*2;
+        altura_mapa = screenHeight*2;
+        mapa_expansao = new int[largura_mapa / tileSize][altura_mapa / tileSize];
+        inicializarMapaExpansao();
+    }
+    
+    private void inicializarMapaExpansao() {
+        for (int i = 0; i < largura_mapa / tileSize; i++) {
+            for (int j = 0; j < altura_mapa / tileSize; j++) {
+                mapa_expansao[i][j] = 0; 
+            }
+        }
+    }
+    
+    public void startGameThread(){
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    @Override
+    public void run(){
+        intervalo = 1000000000/fps;
+        delta = 0;
+        ultimaAtualizacao = System.nanoTime();
+        tempoReal = 0;
+
+        while(gameThread != null) {
+            tempoReal = System.nanoTime();
+            delta += (tempoReal - ultimaAtualizacao)/intervalo;
+            ultimaAtualizacao = tempoReal;
+
+            if(delta >= 1){
+                update();
+                repaint();
+                delta--;
+            }
+        }
+    }
+
+    public void update(){
+        if(m1.getUpPressed() && playerY > 400){
+            playerY -= playerSpeed;
+        }
+        if(m1.getDownPressed()){
+            playerY += playerSpeed;
+        }
+        if(m1.getLeftPressed() && playerX > 700){
+            playerX -= playerSpeed;
+        }
+        if(m1.getRightPressed()){
+            playerX += playerSpeed;
+        }
+
+        if (playerX < 0 || playerX >= largura_mapa || playerY < 0 || playerY >= altura_mapa) {
+            expandMap();
+        }
+    }
+    
+    public void expandMap() {
+        int novaLargura = largura_mapa * 2;
+        int novaAltura = altura_mapa * 2;
+        int[][] novoMapa = new int[novaLargura / tileSize][novaAltura / tileSize];
+
+        for (int i = 0; i < largura_mapa / tileSize; i++) {
+            for (int j = 0; j < altura_mapa / tileSize; j++) {
+                novoMapa[i][j] = mapa_expansao[i][j];
+            }
+        }
+
+        mapa_expansao = novoMapa;
+        largura_mapa = novaLargura;
+        altura_mapa = novaAltura;
+
+        for (int i = largura_mapa / 2 / tileSize; i < largura_mapa / tileSize; i++) {
+            for (int j = altura_mapa / 2 / tileSize; j < altura_mapa / tileSize; j++) {
+                mapa_expansao[i][j] = 1; // Novo tipo de terreno
+            }
+        }
+    }
+    
+    @Override
+public void paintComponent(Graphics g){
+    super.paintComponent(g);
+    Graphics2D g2 = (Graphics2D) g;
+
+    int offsetX = playerX - screenWidth / 2;
+        int offsetY = playerY - screenHeight / 2;
+
+
+        for (int x = 0; x < largura_mapa / tileSize; x++) {
+            for (int y = 0; y < altura_mapa / tileSize; y++) {
+                int drawX = x * tileSize - offsetX;
+                int drawY = y * tileSize - offsetY;
+                if (drawX + tileSize > 0 && drawX < screenWidth && drawY + tileSize > 0 && drawY < screenHeight) {
+                    g2.drawImage(background, drawX, drawY, tileSize, tileSize, null);
+                }
+            }
+        }
+    //int startX = Math.max(0, playerX / tileSize - screenWidth / tileSize / 2);
+    //int startY = Math.max(0, playerY / tileSize - screenHeight / tileSize / 2);
+    //int endX = Math.min(largura_mapa / tileSize, startX + screenWidth / tileSize + 1);
+    //int endY = Math.min(altura_mapa / tileSize, startY + screenHeight / tileSize + 1);
+
+    //for (int y = startY; y < endY; y++) {
+        //for (int x = startX; x < endX; x++) {
+            //g2.drawImage(background, x * tileSize - playerX + screenWidth / 2, y * tileSize - playerY + screenHeight / 2, tileSize, tileSize, null);
+        //}
+    //}
+
+    g2.drawImage(object1Sprite, object1X - offsetX, object1Y - offsetY, objectWidth, objectHeight, null);
+    g2.drawImage(object2Sprite, object2X - offsetX, object2Y - offsetY, objectWidth, objectHeight, null);
+    g2.drawImage(playerSprite, screenWidth / 2, screenHeight / 2, tileSize, tileSize, null);
+    
+    //g2.drawImage(playerSprite, screenWidth / 2, screenHeight / 2, tileSize, tileSize, null);
+
+    g2.dispose();
+    }
+}
+
