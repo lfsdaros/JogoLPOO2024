@@ -1,0 +1,67 @@
+package mapa;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.util.List;
+
+public class Mapa2 {
+   private static final int larguraMapa = 1000;
+   private static final int alturaMapa = 500;
+   public static final int MAPA_1 = 1;
+   public static final int MAPA_2 = 2;
+   public static final int MAPA_3 = 3;
+   private Obstaculos obstaculos;
+
+   public Mapa2() {
+      this.obstaculos = new Obstaculos();
+   }
+
+   public int getLargura() {
+      return 1000;
+   }
+
+   public int getAltura() {
+      return 500;
+   }
+
+   public void desenharMapa(Graphics g, int mapaAtual) {
+      Color corBorda = Color.BLACK;
+      switch (mapaAtual) {
+         case 1:
+            g.setColor(new Color(0, 100, 0));
+            g.fillRect(0, 0, 1000, 500);
+            corBorda = new Color(92, 64, 5);
+            break;
+         case 2:
+            g.setColor(new Color(194, 178, 128));
+            g.fillRect(25, 25, 475, 475);
+            g.fillRect(500, 50, 975, 475);
+            break;
+         case 3:
+            g.setColor(Color.MAGENTA);
+            g.fillRect(0, 0, 1000, 500);
+            corBorda = Color.GRAY;
+      }
+
+      g.setColor(corBorda);
+      g.fillRect(0, 0, 1000, 25);
+      g.fillRect(0, 0, 25, 500);
+      g.fillRect(0, 475, 1000, 25);
+      g.fillRect(975, 0, 25, 500);
+
+      List<Obstaculo> obstaculos = this.obstaculos.obterObstaculos(mapaAtual);
+
+      for (Obstaculo obstaculo : obstaculos) {
+         Rectangle posicao = obstaculo.getPosicao();
+         g.setColor(Color.RED);
+         g.fillRect(posicao.x, posicao.y, posicao.width, posicao.height);
+
+         Image img = obstaculo.getImagem();
+         if (img != null) {
+            g.drawImage(img, posicao.x, posicao.y, posicao.width, posicao.height, null);
+         }
+      }
+   }
+}
