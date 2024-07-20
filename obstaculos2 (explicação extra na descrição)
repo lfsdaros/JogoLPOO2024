@@ -1,0 +1,65 @@
+package mapa;
+
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+
+public class Obstaculos2 {
+    private List<Obstaculo> obstaculosMapa1;
+    private List<Obstaculo> obstaculosMapa2;
+    private List<Obstaculo> obstaculosMapa3;
+
+   public Obstaculos2() {
+      this.inicializarObstaculos();
+   }
+
+   private void inicializarObstaculos() {
+    this.obstaculosMapa1 = new ArrayList<>();
+    this.obstaculosMapa1.add(new Obstaculo(new Rectangle(450, 250, 32, 225), "resources\\imagens\\imagem1.png"));
+    this.obstaculosMapa1.add(new Obstaculo(new Rectangle(300, 25, 50, 225), "resources\\imagens\\imagem5.png"));
+    this.obstaculosMapa1.add(new Obstaculo(new Rectangle(700, 100, 70, 250), "resources\\imagens\\imagem6.png"));
+    this.obstaculosMapa1.add(new Obstaculo(new Rectangle(725, 375, 32, 32), "resources\\imagens\\imagem3.png"));
+    this.obstaculosMapa1.add(new Obstaculo(new Rectangle(825, 200, 150, 32), "resources\\imagens\\imagem2.png"));
+
+    this.obstaculosMapa2 = new ArrayList<>();
+    this.obstaculosMapa2.add(new Obstaculo(new Rectangle(100, 100, 32, 32), "resources\\imagens\\imagem4.png"));
+    this.obstaculosMapa2.add(new Obstaculo(new Rectangle(300, 300, 50, 100), "resources\\imagens\\imagem5.png"));
+
+    this.obstaculosMapa3 = new ArrayList<>();
+    this.obstaculosMapa3.add(new Obstaculo(new Rectangle(150, 150, 50, 50), "resources\\imagens\\imagem5.png"));
+    this.obstaculosMapa3.add(new Obstaculo(new Rectangle(250, 250, 32, 100), "resources\\imagens\\imagem7.png"));
+ }
+
+ public List<Obstaculo> obterObstaculos(int mapaAtual) {
+    switch (mapaAtual) {
+       case 1:
+          return this.obstaculosMapa1;
+       case 2:
+          return this.obstaculosMapa2;
+       case 3:
+          return this.obstaculosMapa3;
+       default:
+          return new ArrayList<>();
+    }
+ }
+}
+
+class Obstaculo {
+ private Rectangle posicao;
+ private Image imagem;
+
+ public Obstaculo(Rectangle posicao, String caminhoImagem) {
+    this.posicao = posicao;
+    this.imagem = new ImageIcon(caminhoImagem).getImage();
+ }
+
+ public Rectangle getPosicao() {
+    return posicao;
+ }
+
+ public Image getImagem() {
+    return imagem;
+ }
+}
