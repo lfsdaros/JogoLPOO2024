@@ -6,37 +6,27 @@ import excecoes.ItemErradoException;
 public abstract class ItemPadrao {
     
     private int x_item, y_item; 
-    protected PersonagemPadrao player;
+    protected PersonagemPadrao personagem;
     protected  Inventario inventario;
+    private String nomeItem;
 
-
-    public ItemPadrao(int x_item, int y_item, PersonagemPadrao player, Inventario inventario){
+    public ItemPadrao(int x_item, int y_item, PersonagemPadrao personagem, Inventario inventario, String nomeItem){
         this.x_item = x_item;
         this.y_item = y_item;
-        this.player = player;
+        this.personagem = personagem;
+        this.nomeItem = nomeItem;
         this.inventario = inventario;
     }
 
-    public boolean  achouItem(int x_item, int y_item){
-        boolean retorno = (x_item == this.player.getX() && y_item == this.player.getY());
-        System.out.println("Parabens! voce achou um(a) ");
+    public boolean achouItem(){
+        boolean retorno = (this.x_item == this.personagem.getX() && this.y_item == this.personagem.getY());
+        System.out.println("Parabens! voce achou um item! ");
         return retorno;
     }
-    
-    // public void pegarItem(int x_item, int y_item, ItemPadrao item){
-    //    if(achouItem(x_item, y_item) == true){
-    //         if (){  //tecla a definir
-    //             this.inventario.adicionarItem(item);   
-    //         }
-    //         else if () { // tecla a definir
-    //             usarItem(item);
-    //         }
-    //    }
-            
-    // }
                 
     public abstract void usarItem(ItemPadrao item) throws ItemErradoException;
    
+    public abstract int getQuantidadeItens();
                  
     public int getX_item() {
                     return x_item;
@@ -53,5 +43,10 @@ public abstract class ItemPadrao {
     public void setY_item(int y_item) {
         this.y_item = y_item;
     }
+
+    public String getNomeItem() {
+        return nomeItem;
+    }
+
 
 }

@@ -4,12 +4,13 @@ import entidades.personagem.PersonagemPadrao;
 import excecoes.ItemErradoException;
 
 public class Item_Granada extends ItemPadrao{
-    private int quantidadeGranadas;
+    private int quantidade;
+   
 
     
     public Item_Granada(int x_item, int y_item, PersonagemPadrao player, Inventario inventario, int quantidadeGranadas) {
-      super(x_item, y_item, player, inventario);
-      this.quantidadeGranadas = 0;
+      super(x_item, y_item, player, inventario, "Granadas");
+      //his.quantidade = 0;
     }
     
     @Override
@@ -23,13 +24,11 @@ public class Item_Granada extends ItemPadrao{
       }
    }
 
-    public int getQuantidadeGranadas(){
-      return quantidadeGranadas;
-    }
+   @Override
+   public int getQuantidadeItens() {
+       return quantidade;
+   }
 
-    public void setQuantidadeGranadas(int quantidadeGranadas) {
-      this.quantidadeGranadas = quantidadeGranadas;
-    }
     
 }
 

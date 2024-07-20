@@ -11,13 +11,14 @@ public class Inventario {
 
     private List<ItemPadrao> listaDeItens;
     private final int capacidade = 16;
+    private ItemPadrao itemPadrao;
 
     public Inventario() {
         this.listaDeItens = new ArrayList<>();
     }
 
     public void adicionarItem(ItemPadrao item) {   
-        if (listaDeItens.size() < capacidade) {
+        if (listaDeItens.size() < capacidade && itemPadrao.achouItem() == true) {
             listaDeItens.add(item);
         }
     }
@@ -39,10 +40,6 @@ public class Inventario {
     }
 
 
-    // public boolean estaCheio() {
-    //     return listaDeItens.size() >= capacidade;
-    // }
-
 
     public List<ItemPadrao> getInventario() {
         return new ArrayList<>(listaDeItens); 
@@ -53,11 +50,30 @@ public class Inventario {
         if (itens.size() <= capacidade) {
             this.listaDeItens = new ArrayList<>(itens);
         } else {
-            
             this.listaDeItens = new ArrayList<>(itens.subList(0, capacidade));
         }
     }
 
+    public boolean procurarItem(String nomeItem) {
+        for (ItemPadrao item : listaDeItens) {
+            if (item.getNomeItem().equals(nomeItem)) {
+                return true;
+            }
+        }
+        return false;
+    }
    
+    public int obterQuantidadeItemX(String nomeItem) {
+        for (ItemPadrao item : listaDeItens) {
+            if (item.getNomeItem().equals(nomeItem)) {
+                return item.getQuantidadeItens();
+            }
+        }
+        return 0;
+    }
+
+    public List<ItemPadrao> getListaDeItens() {
+        return listaDeItens;
+    }
     
 }
