@@ -1,0 +1,87 @@
+package Teste;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+
+public class TelaEscolha extends JFrame{
+    public TelaEscolha(){
+        setTitle("Tela de escolha do jogo");
+        setUndecorated(true); 
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel mainPanel2 = new JPanel();
+        mainPanel2.setBackground(new Color(121, 0, 0));
+        mainPanel2.setLayout(new BoxLayout(mainPanel2, BoxLayout.Y_AXIS));
+
+        Color buttonColor2 = new Color(255, 255, 255);
+        Color titleColor2 = new Color(255, 255, 255);
+        Font buttonFont2 = new Font("Serif", Font.BOLD, 16);
+        Font titleFont2 = new Font("Serif", Font.BOLD, 40);
+
+        JLabel tituloLabel2 = new JLabel("SELECIONE SEU COMBATENTE");
+        tituloLabel2.setForeground(titleColor2);
+        tituloLabel2.setFont(titleFont2);
+        tituloLabel2.setAlignmentX(CENTER_ALIGNMENT); 
+
+        mainPanel2.add(Box.createVerticalStrut(250)); 
+        mainPanel2.add(tituloLabel2);
+        mainPanel2.add(Box.createVerticalStrut(100)); 
+
+        JButton artilhariaButton = new JButton("Artilharia");
+        artilhariaButton.setBackground(buttonColor2);
+        artilhariaButton.setFont(buttonFont2);
+        artilhariaButton.setAlignmentX(CENTER_ALIGNMENT);
+        artilhariaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Artilharia escolhido");
+                
+            }
+        });
+
+        JButton cavalariaButton = new JButton("Cavalaria");
+        cavalariaButton.setBackground(buttonColor2);
+        cavalariaButton.setFont(buttonFont2);
+        cavalariaButton.setAlignmentX(CENTER_ALIGNMENT); 
+        cavalariaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Cavalaria escolhido");
+            }
+        });
+
+        JButton infantariaButton = new JButton("Infantaria");
+        infantariaButton.setBackground(buttonColor2);
+        infantariaButton.setFont(buttonFont2);
+        infantariaButton.setAlignmentX(CENTER_ALIGNMENT); 
+        infantariaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Infantaria escolhido");
+            }
+        });
+
+        mainPanel2.add(artilhariaButton);
+        mainPanel2.add(Box.createVerticalStrut(10));
+        mainPanel2.add(cavalariaButton);
+        mainPanel2.add(Box.createVerticalStrut(10)); 
+        mainPanel2.add(infantariaButton);
+
+        add(mainPanel2);
+    }
+
+}
+
