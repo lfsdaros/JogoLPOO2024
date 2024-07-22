@@ -1,0 +1,85 @@
+package Teste;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+
+public class TelaInicial extends JFrame {
+    public TelaInicial() {
+        setTitle("Tela Inicial do Jogo");
+        setUndecorated(true); 
+        setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(new Color(121, 0, 0));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+
+        Color buttonColor = new Color(255, 255, 255);
+        Color titleColor = new Color(255, 255, 255);
+        Font buttonFont = new Font("Serif", Font.BOLD, 16);
+        Font titleFont = new Font("Serif", Font.BOLD, 50);
+
+        JLabel tituloLabel = new JLabel("JOBA GUERRAS");
+        tituloLabel.setForeground(titleColor);
+        tituloLabel.setFont(titleFont);
+        tituloLabel.setAlignmentX(CENTER_ALIGNMENT); 
+
+        mainPanel.add(Box.createVerticalStrut(250)); 
+        mainPanel.add(tituloLabel);
+        mainPanel.add(Box.createVerticalStrut(100)); 
+
+        JButton jogarButton = new JButton("Jogar");
+        jogarButton.setBackground(buttonColor);
+        jogarButton.setFont(buttonFont);
+        jogarButton.setAlignmentX(CENTER_ALIGNMENT);
+        jogarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Iniciar Jogo");
+            }
+        });
+
+        JButton historiaButton = new JButton("História");
+        historiaButton.setBackground(buttonColor);
+        historiaButton.setFont(buttonFont);
+        historiaButton.setAlignmentX(CENTER_ALIGNMENT); 
+        historiaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TelaHistoria().setVisible(true);
+            }
+        });
+
+        JButton sairButton = new JButton("Sair");
+        sairButton.setBackground(buttonColor);
+        sairButton.setFont(buttonFont);
+        sairButton.setAlignmentX(CENTER_ALIGNMENT); 
+        sairButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        mainPanel.add(jogarButton);
+        mainPanel.add(Box.createVerticalStrut(10));
+        mainPanel.add(historiaButton);
+        mainPanel.add(Box.createVerticalStrut(10)); 
+        mainPanel.add(sairButton);
+
+        add(mainPanel);
+    }
+
+}
