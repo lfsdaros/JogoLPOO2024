@@ -6,6 +6,9 @@ import itens.Inventario;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -28,11 +31,11 @@ public class TelaCombate extends JFrame {
     private int inimigoGridX = 9, inimigoGridY = 9;
     private boolean turnoPersonagem = true;
 
-    public TelaCombate(PersonagemPadrao personagem, int nivelAtual, TelaJogo telaJogo) {
+    public TelaCombate(PersonagemPadrao personagem, int nivelAtual, TelaJogo telaJogo, Inventario inventario) {
         
         
         this.personagem = personagem;
-        this.inventario = new Inventario();
+        this.inventario = inventario;
         
         this.inimigo = new Inimigos(100, 100, 5, 150, 0, 1);
         inimigo.setDanoInimigo(nivelAtual); 
@@ -58,7 +61,32 @@ public class TelaCombate extends JFrame {
                 dispose();
             }
         });
+
+        addKeyListener((KeyListener) new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (turnoPersonagem) {
+                    switch (e.getKeyCode()) {
+                        case KeyEvent.VK_M:
+                            usarItem("Morfina");
+                            break;
+                        case KeyEvent.VK_C:
+                            usarItem("Colete");
+                            break;
+                        case KeyEvent.VK_G:
+                            usarItem("Granada");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        });
+    }
         
+    private void usarItem(String nomeItem) {
+        inventario.usarItem(nomeItem, personagem);
+        repaint();
     }
 
     private void moverPersonagemCombate(int x, int y) {
@@ -140,8 +168,6 @@ public class TelaCombate extends JFrame {
             nivelAtual += 1;
 
             if (nivelAtual > 3) {
-                nivelAtual = 3;
-            } else if (nivelAtual == 3){
                 new TelaGameWin().setVisible(true);
                 dispose();
             }
@@ -205,9 +231,9 @@ public class TelaCombate extends JFrame {
             
         //LEGENDAS
             g.setColor(Color.WHITE);
-            g.drawString("MORFINA: " + inventario.getListaDeItens(), 300, 425);
-            g.drawString("COLETE: " + inventario.getListaDeItens(), 300, 450);
-            g.drawString("GRANADA: " + inventario.getListaDeItens(), 300, 475);
+            g.drawString("(M)ORFINA: " + inventario.verQuantidadeItens("Morfina"), 300, 425);
+            g.drawString("(C)OLETE: " + inventario.verQuantidadeItens("Colete"), 300, 450);
+            g.drawString("(G)RANADA: " + inventario.verQuantidadeItens("Granada"), 300, 475);
 
             
             g.drawString(("SAÚDE PERSONAGEM: " + personagem.getSaudeAtual()), 10, 425);

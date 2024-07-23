@@ -25,7 +25,7 @@ public class Inimigos extends Entidade {
     }
 
     public void setDanoInimigo(int nivelAtual) {
-        this.danoInimigo = nivelAtual*50 ;
+        this.danoInimigo = nivelAtual*30 ;
     }
 
     public void atacar(PersonagemPadrao personagem){

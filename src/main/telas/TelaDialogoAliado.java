@@ -1,7 +1,6 @@
 package main.telas;
 
 import entidades.personagem.PersonagemPadrao;
-import itens.Inventario;
 import itens.Item_Colete;
 import itens.Item_Granada;
 import itens.Item_Morfina;
@@ -23,13 +22,12 @@ public class TelaDialogoAliado extends JFrame{
     public TelaDialogoAliado (TelaJogo telaJogo, PersonagemPadrao personagem){
 
         this.telaJogo = telaJogo;
-        Inventario inventario = new Inventario();
+        
         this.personagem = personagem;
 
-        Item_Morfina morfina1 = new Item_Morfina(personagem, inventario);
-        Item_Morfina morfina2 = new Item_Morfina(personagem, inventario);
-        Item_Colete colete1 = new Item_Colete(personagem, inventario);
-        Item_Granada granada1 = new Item_Granada(personagem, inventario);
+        Item_Morfina morfina1 = new Item_Morfina(3, personagem);
+        Item_Colete colete1 = new Item_Colete(2, personagem);
+        Item_Granada granada1 = new Item_Granada(1, personagem);
 
         setTitle("Quiz");
         setUndecorated(true);  
@@ -64,6 +62,9 @@ public class TelaDialogoAliado extends JFrame{
         alternativa1Button.setAlignmentX(CENTER_ALIGNMENT);
         alternativa1Button.addActionListener((ActionEvent e) -> {
             System.out.println("Resposta errada!");
+
+            this.telaJogo.setVisible(true);
+            dispose();
         });
 
         JButton alternativa2Button = new JButton("Letra B");
@@ -73,10 +74,9 @@ public class TelaDialogoAliado extends JFrame{
         alternativa2Button.addActionListener((ActionEvent e) -> {
             System.out.println("Resposta certa!");
 
-            inventario.adicionarItem(morfina1);
-            inventario.adicionarItem(morfina2);
-            inventario.adicionarItem(colete1);
-            inventario.adicionarItem(granada1);
+            this.telaJogo.inventario.adicionarItem(morfina1);
+            this.telaJogo.inventario.adicionarItem(colete1);
+            this.telaJogo.inventario.adicionarItem(granada1);
 
 
             this.telaJogo.setVisible(true);
@@ -89,6 +89,9 @@ public class TelaDialogoAliado extends JFrame{
         alternativa3Button.setAlignmentX(CENTER_ALIGNMENT);
         alternativa3Button.addActionListener((ActionEvent e) -> {
             System.out.println("Resposta errada!");
+
+            this.telaJogo.setVisible(true);
+            dispose();
         });
 
         buttonPanel.add(alternativa1Button);

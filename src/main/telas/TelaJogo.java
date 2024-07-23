@@ -1,6 +1,7 @@
 package main.telas;
 
 import entidades.personagem.*;
+import itens.Inventario;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
@@ -11,6 +12,7 @@ import mapa.*;
 public class TelaJogo extends JPanel {
     
     private PersonagemPadrao personagem;
+    public Inventario inventario;
 
     private int mapaAtual = 1;
     private final Mapa mapa;
@@ -20,7 +22,8 @@ public class TelaJogo extends JPanel {
     private final Timer timer;
     
     public TelaJogo(Mapa mapa, PersonagemPadrao personagem) {
-
+        
+        this.inventario = new Inventario(6);
         this.mapa = mapa;
         this.personagem = personagem;
         this.obstaculos = new Obstaculos();
@@ -59,6 +62,11 @@ public class TelaJogo extends JPanel {
         if(mapaAtual == 1 && personagem.getX() >= 840 && personagem.getX() <= 875 && personagem.getY() >= 420 && personagem.getY() <= 455){
             g.setColor(Color.BLACK);
             g.drawString("VOCÊ ENCONTROU UM ALIADO!! APERTE ' I ' PARA INTERAGIR COM ELE", 10, 15);
+            if(this.inventario.estaVazio()){
+                g.drawString("SEU INVENTÁRIO ESTÁ VAZIO!", 830, 490);
+            } else{
+                g.drawString("INVENTÁRIO CHEIO! BOA SORTE", 830, 490);
+            }
         }
         
     //COMBATE - MAPA 1
@@ -83,7 +91,7 @@ public class TelaJogo extends JPanel {
     }
 
     public void abrirTelaCombate(int combateAtual) {
-        TelaCombate telaCombate = new TelaCombate(personagem, combateAtual,this);
+        TelaCombate telaCombate = new TelaCombate(personagem, combateAtual,this, inventario);
         telaCombate.setVisible(true);
     }
 
