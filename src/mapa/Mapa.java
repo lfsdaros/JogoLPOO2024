@@ -324,13 +324,11 @@ public class Mapa {
 
 
             //TILES - ALIADO
-                //g.drawImage(madeiraTile, 540, 370, null);
                 g.drawImage(madeiraTile, 540, 408, null);
                 g.drawImage(madeiraTile, 540, 438, null);
                 g.drawImage(madeiraTile, 675, 408, null);
                 g.drawImage(madeiraTile, 675, 438, null);
-                //g.drawImage(madeiraTile, 675, 430, null);
-                //g.drawImage(madeiraTile, 570, 370, null);
+                
 
             //TILES - INIMIGO
                 g.drawImage(bandeiraFinal, 875, 245, 32, 32, null);

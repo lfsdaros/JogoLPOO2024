@@ -62,7 +62,10 @@ public class Controles implements KeyListener {
                 break;
 
             case KeyEvent.VK_I:
-                new TelaDialogoAliado(telaJogo, personagem).setVisible(true);
+            
+                if(listaObstaculosAtual == 1 && personagem.getX() >= 835 && personagem.getX() <= 880 && personagem.getY() >= 420 && personagem.getY() <= 450 ){
+                    new TelaDialogoAliado(telaJogo, personagem).setVisible(true);
+                }
                 break;
             default:
                 break;
