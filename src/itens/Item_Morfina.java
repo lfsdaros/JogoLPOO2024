@@ -1,31 +1,23 @@
 package itens;
 
 import entidades.personagem.PersonagemPadrao;
-import excecoes.ItemErradoException;
 
 public class Item_Morfina extends ItemPadrao {
     
-    public final int saudeMorfina = 10;
+    private  final int saudeMorfina = 75;
     private int quantidade;
+    private PersonagemPadrao personagem;
 
     
-    public Item_Morfina(PersonagemPadrao personagem, Inventario inventario) {
-        super(personagem, inventario);
+    public Item_Morfina(int quantidade, PersonagemPadrao personagem) {
+        super("Morfina", quantidade);
+        this.personagem = personagem;
     }
 
     @Override
-    public void usarItem(ItemPadrao item) throws ItemErradoException{
-        if(item instanceof Item_Morfina){
-          int novaSaude = super.personagem.getSaudeAtual() + this.saudeMorfina;
-          super.personagem.setSaudeAtual(novaSaude);
-        } else{
-            throw new ItemErradoException("Item errado");
-        }
+    public void aplicarEfeitoItem(PersonagemPadrao personagem){
+        int novaSaude = this.personagem.getSaudeAtual() + this.saudeMorfina;
+          this.personagem.setSaudeAtual(novaSaude);
     }
     
-
-    @Override
-    public int getQuantidadeItens() {
-        return quantidade;
-    }
 }

@@ -26,7 +26,7 @@ public class PersonagemPadrao extends Entidade{
     public void setDanoPersonagem(int nivelAtual){    
       switch(nivelAtual){
         case 2:
-          this.danoPersonagem = 50;
+          this.danoPersonagem = 75;
           break;
         case 3:
           this.danoPersonagem = 100;

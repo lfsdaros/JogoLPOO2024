@@ -2,30 +2,31 @@ package itens;
 
 
 import entidades.personagem.PersonagemPadrao;
-import excecoes.ItemErradoException;
 
 public class Item_Colete extends ItemPadrao {
-    private final int protecaoColete = 10 ;
+    private final int protecaoColete = 75 ;
     private int quantidade;
+    private PersonagemPadrao personagem;
 
-    public Item_Colete(PersonagemPadrao personagem, Inventario inventario) {
-        super(personagem, inventario);
+    public Item_Colete(int quantidade, PersonagemPadrao personagem) {
+        super("Colete", quantidade);
+        this.personagem = personagem;
     }
 
     @Override
-    public void usarItem(ItemPadrao item) throws ItemErradoException{
-        if(item instanceof Item_Colete){
-            int novaProtecao = super.personagem.getProtecaoAtual() + this.protecaoColete;
-            super.personagem.setProtecaoAtual(novaProtecao);
-        } else{
-            throw new ItemErradoException("Item errado");
-        }
+    public void aplicarEfeitoItem(PersonagemPadrao personagem){
+        int novaProtecao = this.personagem.getProtecaoAtual() + this.protecaoColete;
+        this.personagem.setProtecaoAtual(novaProtecao);
     }
 
-
-    @Override
-    public int getQuantidadeItens() {
-        return quantidade;
-    }
+    // @Override
+    // public void usarItem(ItemPadrao item) throws ItemErradoException{
+    //     if(item instanceof Item_Colete){
+    //         int novaProtecao = this.personagem.getProtecaoAtual() + this.protecaoColete;
+    //         this.personagem.setProtecaoAtual(novaProtecao);
+    //     } else{
+    //         throw new ItemErradoException("Item errado");
+    //     }
+    // }
 
 }

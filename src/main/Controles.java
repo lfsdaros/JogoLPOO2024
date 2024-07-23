@@ -63,9 +63,6 @@ public class Controles implements KeyListener {
 
             case KeyEvent.VK_I:
                 new TelaDialogoAliado(telaJogo, personagem).setVisible(true);
-
-                //telaJogo.setVisible(false);
-                
                 break;
             default:
                 break;
