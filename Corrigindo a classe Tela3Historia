@@ -1,0 +1,25 @@
+package Teste;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+
+public class Tela3Historia extends JFrame {
+        public Tela3Historia() {
+            setUndecorated(true);
+            setSize(1000, 500);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setLocationRelativeTo(null);
+
+            JPanel panel2 = new JPanel();
+            panel2.setBackground(new Color(121, 0, 0)); 
+            JLabel historia3Label = new JLabel("<html><h1>I</h1><p>The War</p><p>Quando líderes se revoltam, guerras acontecem.</p><p>Ao comando de seus generais, soldados são enviados aos</p><p>mais remotos e adversos cenários que um humano pode vivenciar.</p><p>Por sua bravura e coragem, você foi escolhido para defender</p><p>os ideais de seu povo, seja um verdadeiro guerreiro no fronte. Boa sorte, combatente, não fracasse...</p>Ao apertar a tecla G, você iniciará sua jornada em busca da glória, está pronto?</html>");
+            historia3Label.setFont(new Font("Serif", Font.BOLD, 18));
+            historia3Label.setForeground(new Color(255,255,255));
+
+            panel2.add(historia3Label);
+            add(panel2);
+        }
+}
