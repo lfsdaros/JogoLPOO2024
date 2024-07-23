@@ -1,0 +1,26 @@
+package Teste;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+
+public class TelaGameOver extends JFrame{
+      public TelaGameOver() {
+
+        setUndecorated(true);
+        setSize(1000, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        JPanel panel3 = new JPanel();
+        panel3.setBackground(new Color(121, 0, 0)); 
+        JLabel gameOverLabel = new JLabel("GAME OVER");
+        gameOverLabel.setFont(new Font("Serif", Font.BOLD, 70));
+        gameOverLabel.setForeground(new Color(255,255,255));
+
+        panel3.add(gameOverLabel);
+        add(panel3);
+    }
+}
