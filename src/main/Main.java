@@ -1,11 +1,14 @@
 package main;
 
-import javax.swing.*;
+import java.awt.EventQueue;
+import main.telas.TelaInicial;
 
 public class Main {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new ConfigsTela());
+        EventQueue.invokeLater(() -> {
+            TelaInicial configsTela = new TelaInicial();
+            configsTela.setVisible(true);
+        });
     }
-    
 }
 

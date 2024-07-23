@@ -1,57 +1,56 @@
 package itens;
 
 import entidades.personagem.PersonagemPadrao;
-import excecoes.ItemErradoException;
+
+
 
 public abstract class ItemPadrao {
-    
-    private int x_item, y_item; 
-    protected PersonagemPadrao player;
-    protected  Inventario inventario;
+    private String nome;
+    private int quantidade;
 
-
-    public ItemPadrao(int x_item, int y_item, PersonagemPadrao player, Inventario inventario){
-        this.x_item = x_item;
-        this.y_item = y_item;
-        this.player = player;
-        this.inventario = inventario;
+    public ItemPadrao(String nome, int quantidade) {
+        this.nome = nome;
+        this.quantidade = quantidade;
     }
 
-    public boolean  achouItem(int x_item, int y_item){
-        boolean retorno = (x_item == this.player.getX() && y_item == this.player.getY());
-        System.out.println("Parabens! voce achou um(a) ");
-        return retorno;
-    }
-    
-    // public void pegarItem(int x_item, int y_item, ItemPadrao item){
-    //    if(achouItem(x_item, y_item) == true){
-    //         if (){  //tecla a definir
-    //             this.inventario.adicionarItem(item);   
-    //         }
-    //         else if () { // tecla a definir
-    //             usarItem(item);
-    //         }
-    //    }
-            
-    // }
-                
-    public abstract void usarItem(ItemPadrao item) throws ItemErradoException;
-   
-                 
-    public int getX_item() {
-                    return x_item;
+    public abstract void aplicarEfeitoItem(PersonagemPadrao personagem); //throws ItemErradoException;
+
+    public String getNome() {
+        return nome;
     }
 
-    public void setX_item(int x_item) {
-        this.x_item = x_item;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public int getY_item() {
-        return y_item;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
-
-    public void setY_item(int y_item) {
-        this.y_item = y_item;
-    }
-
 }
+
+// import entidades.personagem.PersonagemPadrao;
+// import excecoes.ItemErradoException;
+
+// public abstract class ItemPadrao {
+    
+//     //private int x_item, y_item; 
+//     private  PersonagemPadrao personagem;
+//    // protected  Inventario inventario;
+//     private String nomeItem;
+
+  
+//     public ItemPadrao(PersonagemPadrao personagem, Inventario inventario, String nomeItem){
+//         this.personagem = personagem;
+//         this.nomeItem = nomeItem;
+//         this.inventario = inventario;
+//     }
+                
+//     public abstract void usarItem(ItemPadrao item) throws ItemErradoException;
+   
+//     public abstract int getQuantidadeItens();
+                 
+//     public String getNomeItem() {
+//         return nomeItem;
+//     }
+
+

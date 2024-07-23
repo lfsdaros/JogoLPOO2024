@@ -52,7 +52,11 @@ public abstract class Entidade {
     }
 
     public void setProtecaoAtual(int protecaoAtual) {
-        this.protecaoAtual = protecaoAtual;
+        if(protecaoAtual < 0){
+            this.protecaoAtual = 0;
+        } else {
+            this.protecaoAtual = protecaoAtual;
+        }
     }
 
     public int getNivelAtual() {

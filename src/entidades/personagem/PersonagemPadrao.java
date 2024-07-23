@@ -1,251 +1,115 @@
 package entidades.personagem;
 
 import entidades.Entidade;
+import entidades.npcs.Inimigos;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.util.List;
+import javax.swing.ImageIcon;
 
 public class PersonagemPadrao extends Entidade{
-  private String patenteAtual;
-  private int danoPatente;
-  private final int danoBacamarte = 100;  //arma p todos
-  private final int saudeMaxima = 100;
 
-  private boolean movingUp = false;
-  private boolean movingLeft = false;
-  private boolean movingDown = false;
-  private boolean movingRight = false;
+    private int danoPersonagem;
+    private final int saudeMaxima = 300;
+
+    private final Image ArtilhariaTile = new ImageIcon("resources\\images\\GIF_Artilharia.gif").getImage();
+    private final Image CavalariaTile = new ImageIcon("resources\\images\\GIF_Cavalaria.gif").getImage();
+    private final Image InfantariaTile = new ImageIcon("resources\\images\\GIF_Infantaria.gif").getImage();
 
 
-  public PersonagemPadrao(int x, int y, int velocidade, int saudeAtual, int protecaoAtual, int nivelAtual){
-    super(x, y, velocidade, saudeAtual, protecaoAtual, nivelAtual);
-  }
- 
-
-  public void setPatenteAtual(int nivelAtual){    
-    switch(nivelAtual){
-      case 2 -> {
-          this.patenteAtual = "Cabo";
-          this.danoPatente = 10;
-        }
-      case 3 -> {
-          this.patenteAtual = "Tenente";
-          this.danoPatente = 25;
-        }
-      case 4 -> {
-          this.patenteAtual = "Capitão";
-          this.danoPatente = 50;
-        }
-      case 5 -> {
-          this.patenteAtual = "General";
-          this.danoPatente = danoBacamarte;
-        }
-      default -> {
-          this.patenteAtual = "Recruta";  //nivel basico
-          this.danoPatente = 5;
-        }    
-      }   
-  }
-
-  public String getPatenteAtual(){
-    return this.patenteAtual;
-  }
-
-  public int getDanoPatente(){
-      return this.danoPatente;
-  }
-
-  @Override
-  public void setSaudeAtual(int saudeAtual){
-    if(super.getSaudeAtual() > this.saudeMaxima){
-        super.saudeAtual = this.saudeMaxima;
-    } else {
-      super.saudeAtual = saudeAtual;
+    public PersonagemPadrao(int x, int y, int velocidade, int saudeAtual, int protecaoAtual, int nivelAtual){
+      super(x, y, velocidade, saudeAtual, protecaoAtual, nivelAtual);
     }
-  }
 
 
-  public void moveUp() {
-    super.setY(super.getY() - super.getVelocidade());
-  }
+    public void setDanoPersonagem(int nivelAtual){    
+      switch(nivelAtual){
+        case 2:
+          this.danoPersonagem = 75;
+          break;
+        case 3:
+          this.danoPersonagem = 100;
+          break;
+        default:
+          this.danoPersonagem = 50;
+          break;
+      }
+    }
 
-  public void moveLeft() {
-      super.setX(super.getX() - super.getVelocidade());
-  }
+    public int getDanoPersonagem() {
+      return this.danoPersonagem;
+    }
 
-  public void moveDown() {
-      super.setY(super.getY() + super.getVelocidade());
-  }
+    public void atacar(Inimigos inimigo){
+      inimigo.setSaudeAtual(inimigo.getSaudeAtual() - this.danoPersonagem);
+    }
 
-  public void moveRight() {
-      super.setX(super.getX() + super.getVelocidade());
-  }
+    @Override
+    public void setSaudeAtual(int saudeAtual){
+      if(super.getSaudeAtual() > this.saudeMaxima){
+        this.saudeAtual = this.saudeMaxima;
+      } else if(super.getSaudeAtual() < 0){
+        this.saudeAtual = 0;
+      } else {
+        this.saudeAtual = saudeAtual; 
+      }
+    }
 
-  public boolean isMovingUp() {
-      return movingUp;
-  }
+    public void mover(String direcao, List<Rectangle> obstaculos) {
+      int x = super.getX();
+      int y = super.getY();
+      int velocidade = super.getVelocidade();
 
-  public void setMovingUp(boolean movingUp) {
-      this.movingUp = movingUp;
-  }
+      int novoX = x;
+      int novoY = y;
 
-  public boolean isMovingLeft() {
-      return movingLeft;
-  }
+      switch (direcao) {
+          case "cima":
+              novoY = y - velocidade;
+              break;
+          case "baixo":
+              novoY = y + velocidade;
+              break;
+          case "esquerda":
+              novoX = x - velocidade;
+              break;
+          case "direita":
+              novoX = x + velocidade;
+              break;
+          default:
+              break;
+      }
 
-  public void setMovingLeft(boolean movingLeft) {
-      this.movingLeft = movingLeft;
-  }
+      if (novoY >= 32 && novoY <= 436 && novoX >= 32 && novoX <= 936 && !colideComObstaculo(novoX, novoY, obstaculos)) {
+          super.setX(novoX);
+          super.setY(novoY);
+      }
+    }
 
-  public boolean isMovingDown() {
-      return movingDown;
-  }
+    public boolean colideComObstaculo(int x, int y, List<Rectangle> obstaculos) {
 
-  public void setMovingDown(boolean movingDown) {
-      this.movingDown = movingDown;
-  }
+      Rectangle personagemRect = new Rectangle(x, y, 32, 32); // Ajuste o tamanho conforme necessário
+      
+      for (Rectangle obstaculo : obstaculos) {
+        
+          if (personagemRect.intersects(obstaculo) == true) {
+              return true;
+          }
+        }
+      return false;
+    }
 
-  public boolean isMovingRight() {
-      return movingRight;
-  }
-
-  public void setMovingRight(boolean movingRight) {
-      this.movingRight = movingRight;
-  }
+    public void desenharPersonagem(Graphics g, PersonagemPadrao tipoPersonagem){
+      if(tipoPersonagem instanceof Artilharia){
+        g.drawImage(ArtilhariaTile, super.getX(), super.getY(), null);      
+      } else if(tipoPersonagem instanceof Cavalaria){
+        g.drawImage(CavalariaTile, super.getX(), super.getY(), null);
+      } else if(tipoPersonagem instanceof Infantaria){
+        g.drawImage(InfantariaTile, super.getX(), super.getY(), null);
+      }
+      
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //   private int nivelAtual;
-  //   private int saudeAtual;
-  //   private int protecaoAtual;
-
-  //   private String patenteAtual;
-  //   private int danoPatente;
-
-  //   private final int danoBacamarte = 100;  //arma p todos
-  //   private final int saudeMaxima = 100;
-
-  //   private int x_personagem;
-  //   private int y_personagem;
-  //   private int velocidadePersonagem;
-
-
-
-
-  //  public PersonagemPadrao(int nivelAtual){       // }, int saudeAtual){
-  //   this.nivelAtual = nivelAtual;
-  //   this.saudeAtual = saudeMaxima; //inicio == saude maxima
-  //   this.protecaoAtual = 0;        // inicio == 0 de protecao
-  //   this.x_personagem = 100;      //Posicao inicial
-  //   this.y_personagem = 100;      //Posicao inicial
-  //   this.velocidadePersonagem = 5;
-
-  //   //this.saudeAtual = saudeAtual;
-  //   //setPatenteAtual(nivelAtual);
-    
-  //  }
-
-  //   public void setSaudeAtual(int saudeAtual){
-  //     if(saudeAtual >= this.saudeMaxima){
-  //       this.saudeAtual = this.saudeMaxima;
-  //     }else{
-  //     this.saudeAtual = saudeAtual;
-  //     }
-  //   }
-
-  //   public int getSaudeAtual(){
-  //       return saudeAtual;
-  //   }
-
-  //   public void setProtecaoAtual(int protecaoAtual){
-  //     this.protecaoAtual = protecaoAtual;
-  //   }
-
-  //   public int getProtecaoAtual(){
-  //     return this.protecaoAtual;
-  //   }
-
-
-  //   public void setNivelAtual(int nivelAtual){
-  //       // switch(nivelAtual){
-  //       //     case 2:
-  //       //     this.patenteAtual = "Cabo";
-  //       //     break;
-  //       //     case 3:
-  //       //     this.patenteAtual = "Tenente";
-  //       //     break;
-  //       //     case 4:
-  //       //     this.patenteAtual = "Capitão";
-  //       //     break;
-  //       //     case 5: 
-  //       //     this.patenteAtual = "General";
-  //       //     break;
-
-  //       //     default:
-  //       //     this.patenteAtual = "Recruta";  //nivel basico     
-  //       // }   
-
-  //       this.nivelAtual = nivelAtual;
-  //   }
-
-    
-    
-
-  //   // public void setDanoPatente(String patenteAtual){  // dano padrao de cada patente
-  //   //     switch (patenteAtual) {
-  //   //       case "Cabo": 
-  //   //         this.danoPatente = 10;
-  //   //         break;
-  //   //       case "Tenente":
-  //   //         this.danoPatente = 25;
-  //   //         break;
-  //   //       case "Capitão": 
-  //   //         this.danoPatente = 50;
-  //   //         break;
-  //   //       case "General":
-  //   //         this.danoPatente = danoBacamarte;
-  //   //         break;
-  //   //       default:
-  //   //         this.danoPatente = 5;
-  //   //         break;
-  //   //     }
-  //   // }
-
-  //   public int getX_personagem() {
-  //     return x_personagem;
-  //   }
-
-  //   public void setX_personagem(int x_personagem) {
-  //     this.x_personagem = x_personagem;
-  //   }
-
-  //   public int getY_personagem() {
-  //     return y_personagem;
-  //   }
-
-  //   public void setY_personagem(int y_personagem) {
-  //     this.y_personagem = y_personagem;
-  //   }
-
-  //   public int getVelocidadePersonagem() {
-  //     return velocidadePersonagem;
-  //   }
-
-  //   public void setVelocidadePersonagem(int velocidadePersonagem) {
-  //     this.velocidadePersonagem = velocidadePersonagem;
-  //   }
-
-    
-
-
 

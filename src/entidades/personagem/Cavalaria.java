@@ -1,31 +1,18 @@
 package entidades.personagem;
 
 public class Cavalaria extends PersonagemPadrao {
-    private int danoRevolver;  //padrao = ?
+    private int danoCavalaria = 30;  
    
-    // public Cavalaria(int nivelAtual){
-    //     super(nivelAtual);
-    // }
-
     public Cavalaria(int x, int y, int velocidade, int saudeAtual, int protecaoAtual, int nivelAtual){
         super(x, y, velocidade, saudeAtual, protecaoAtual, nivelAtual);
       }
 
-    public int getDanoRevolver(){
-        return this.danoRevolver;
+    public int getDanoCavalaria(){
+        return this.danoCavalaria;
     }
 
-    public void setDanoRevolver(double distancia){
-        int danoPatente = super.getDanoPatente(); 
-
-        if(distancia > 75){
-            this.danoRevolver = 0;
-        } else if (distancia > 38 && distancia < 74){
-            this.danoRevolver = danoPatente*(3/4);
-        } else if (distancia > 20 && distancia < 37){
-            this.danoRevolver = danoPatente*(1/2);
-        } else {
-            this.danoRevolver = danoPatente;
-        }
+    public void setDanoCavalaria(int nivelAtual){
+        super.setDanoPersonagem(nivelAtual);
+        this.danoCavalaria += super.getDanoPersonagem(); 
     }
 }

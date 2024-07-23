@@ -1,32 +1,20 @@
 package entidades.personagem;
 
 public class Infantaria extends PersonagemPadrao{
-    private int danoEscopeta = 50 ;  // escopeta é a arma base da infantaria
 
-//    public Infantaria(int nivelAtual){
-//     super(nivelAtual);
-//    }
+    private int danoInfantaria = 75; 
 
     public Infantaria(int x, int y, int velocidade, int saudeAtual, int protecaoAtual, int nivelAtual){
         super(x, y, velocidade, saudeAtual, protecaoAtual, nivelAtual);
       }
 
-    public int getDanoEscopeta(){
-        return this.danoEscopeta;
+    public int getDanoInfantaria(){
+        return this.danoInfantaria;
     }
 
-    public void setDanoEscopeta(double distancia){
-        int danoPatente = super.getDanoPatente();
-    
-    // DANO COM DISTANCIA
-        if(distancia > 50){
-            this.danoEscopeta = 0;
-        } else if (distancia > 25 && distancia < 49){
-            this.danoEscopeta = danoPatente*(3/4);
-        } else if (distancia > 10 && distancia < 24){
-            this.danoEscopeta = danoPatente*(1/2);
-        } else {
-            this.danoEscopeta = danoPatente;
-        }
+    public void setDanoInfantaria(int nivelAtual){
+        super.setDanoPersonagem(nivelAtual);
+        this.danoInfantaria += super.getDanoPersonagem();
     }
+    
 }
