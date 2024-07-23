@@ -8,8 +8,8 @@ public class Item_Colete extends ItemPadrao {
     private final int protecaoColete = 10 ;
     private int quantidade;
 
-    public Item_Colete(int x_item, int y_item, PersonagemPadrao player, Inventario inventario) {
-        super(x_item, y_item, player, inventario, "Colete");
+    public Item_Colete(PersonagemPadrao personagem, Inventario inventario) {
+        super(personagem, inventario);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class Inventario {
     }
 
     public void adicionarItem(ItemPadrao item) {   
-        if (listaDeItens.size() < capacidade && itemPadrao.achouItem() == true) {
+        if (listaDeItens.size() < capacidade) {
             listaDeItens.add(item);
         }
     }
@@ -54,18 +54,18 @@ public class Inventario {
         }
     }
 
-    public boolean procurarItem(String nomeItem) {
+    public boolean procurarItem(ItemPadrao tipoItem) {
         for (ItemPadrao item : listaDeItens) {
-            if (item.getNomeItem().equals(nomeItem)) {
+            if (item.getClass() ==  tipoItem.getClass()) {
                 return true;
             }
         }
         return false;
     }
    
-    public int obterQuantidadeItemX(String nomeItem) {
+    public int obterQuantidadeItemX(ItemPadrao tipoItem) {
         for (ItemPadrao item : listaDeItens) {
-            if (item.getNomeItem().equals(nomeItem)) {
+            if (item.getClass() == tipoItem.getClass()) {
                 return item.getQuantidadeItens();
             }
         }

@@ -8,8 +8,8 @@ public class Item_Energetico extends ItemPadrao {
     public final int boostEnergetico = 2;
     private int quantidade;
     
-    public Item_Energetico(int x_item, int y_item, PersonagemPadrao player, Inventario inventario ) {
-        super(x_item, y_item, player, inventario, "Energetico");
+    public Item_Energetico(PersonagemPadrao personagem, Inventario inventario ) {
+        super(personagem, inventario);
     }
 
     @Override

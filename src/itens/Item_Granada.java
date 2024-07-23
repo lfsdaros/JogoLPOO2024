@@ -8,8 +8,8 @@ public class Item_Granada extends ItemPadrao{
    
 
     
-    public Item_Granada(int x_item, int y_item, PersonagemPadrao player, Inventario inventario, int quantidadeGranadas) {
-      super(x_item, y_item, player, inventario, "Granadas");
+    public Item_Granada(PersonagemPadrao personagem, Inventario inventario) {
+      super(personagem, inventario);
       //his.quantidade = 0;
     }
     

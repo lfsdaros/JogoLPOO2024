@@ -9,8 +9,8 @@ public class Item_Morfina extends ItemPadrao {
     private int quantidade;
 
     
-    public Item_Morfina(int x_item, int y_item, PersonagemPadrao player, Inventario inventario) {
-        super(x_item, y_item, player, inventario, "Morfina");
+    public Item_Morfina(PersonagemPadrao personagem, Inventario inventario) {
+        super(personagem, inventario);
     }
 
     @Override

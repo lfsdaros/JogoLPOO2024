@@ -31,21 +31,21 @@ public class EsquemaCombate {
 
     }
 
-    public void atacar(PersonagemPadrao player, Inimigos inimigo){
-        player.setPatenteAtual(player.getNivelAtual());    //definindo o dano que P dará a partir da sua patente
-        
+    public void personagem(PersonagemPadrao personagem, Inimigos inimigo){
+        personagem.setPatenteAtual(personagem.getNivelAtual());    //definindo o dano que P dará a partir da sua patente
+        int danoPersonagem = personagem.getDanoPatente();
         int saudeInimigo = inimigo.getSaudeAtual();
-        int defesaInimigo = inimigo.getProtecaoAtual();
+        //int defesaInimigo = inimigo.getProtecaoAtual();
 
-        if(defender() == 0){
-            inimigo.setSaudeAtual(saudeInimigo - (player.getDanoPatente()));
-        } else if (defender() == 1){
-            System.out.println("O inimigo conseguiu defender ");
+       // if(defender() == 0){
+            inimigo.setSaudeAtual(saudeInimigo - danoPersonagem);
+        // } else if (defender() == 1){
+        //     System.out.println("O inimigo conseguiu defender ");
 
-            inimigo.setSaudeAtual(saudeInimigo - (player.getDanoPatente() - inimigo.getProtecaoAtual()));
+        //     inimigo.setSaudeAtual(saudeInimigo - (personagem.getDanoPatente() - inimigo.getProtecaoAtual()));
             
-            inimigo.setProtecaoAtual(defesaInimigo - player.getDanoPatente());
-        }
+        //     inimigo.setProtecaoAtual(defesaInimigo - personagem.getDanoPatente());
+        // }
     }
 
     public void ataqueEspecial(int quantidadeGranadas){
