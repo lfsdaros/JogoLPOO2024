@@ -1,0 +1,23 @@
+package main;
+
+import javax.swing.JFrame;
+
+public class Main{
+    public static void main(String[] args){
+        JFrame window = new JFrame();
+        Tela t1 = new Tela();
+
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+        window.setTitle("JOBA GUERRAS");
+        window.add(t1);
+
+        
+        window.pack();
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+        
+        t1.startGameThread();
+    }
+
+}
